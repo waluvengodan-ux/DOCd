@@ -1,0 +1,813 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Paws & Care · Vet Clinic</title>
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ---------- RESET & GLOBAL ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background: #f0f9f0;  /* soft mint background */
+      color: #1f3b2c;
+      line-height: 1.6;
+      padding: 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* main card / wrapper */
+    .clinic-wrapper {
+      max-width: 1280px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 2.5rem 2.5rem 2rem 2rem;
+      box-shadow: 0 20px 40px -12px rgba(30, 80, 50, 0.25);
+      overflow: hidden;
+      border: 1px solid #cfeadb;
+      transition: all 0.2s;
+    }
+
+    /* ---------- HEADER (veterinary theme) ---------- */
+    .vet-header {
+      background: linear-gradient(145deg, #e2f3e9 0%, #c8e6d9 100%);
+      padding: 1.8rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px dashed #9bc4aa;
+      position: relative;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      font-size: 2.4rem;
+      color: #1f6e4a;
+      filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.05));
+    }
+
+    .logo-text h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #124d32;
+      line-height: 1.2;
+    }
+
+    .logo-text span {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #2a6b4a;
+      background: #d9f0e3;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      display: inline-block;
+      margin-top: 4px;
+      letter-spacing: 0.3px;
+    }
+
+    .header-badge {
+      background: #ffffffd9;
+      backdrop-filter: blur(4px);
+      padding: 0.5rem 1.2rem;
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #1c5e3f;
+      border: 1px solid #aad5be;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+    }
+
+    .header-badge i {
+      color: #217a4b;
+    }
+
+    /* ---------- MAIN CONTENT ---------- */
+    .main-content {
+      padding: 2.5rem 2rem;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2.5rem;
+      background: #ffffff;
+    }
+
+    /* left side – appointment info & pet illustration */
+    .appointment-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .hero-pet {
+      background: #e6f4ed;
+      border-radius: 2rem;
+      padding: 1.8rem 1.8rem 1.8rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      border: 1px solid #bfdfce;
+      box-shadow: inset 0 2px 8px rgba(255, 255, 255, 0.8), 0 6px 12px rgba(40, 90, 60, 0.08);
+    }
+
+    .hero-pet-text h2 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #0d4f30;
+      margin-bottom: 0.35rem;
+      line-height: 1.2;
+    }
+
+    .hero-pet-text p {
+      color: #2c6043;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .hero-pet-text i {
+      color: #368f5c;
+    }
+
+    .hero-pet-emoji {
+      font-size: 4rem;
+      line-height: 1;
+      filter: drop-shadow(4px 6px 8px rgba(0,0,0,0.08));
+    }
+
+    .clinic-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.6rem;
+      list-style: none;
+      margin-top: 0.5rem;
+    }
+
+    .clinic-features li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #1a4e34;
+      background: #f2fbf6;
+      padding: 0.4rem 1rem 0.4rem 0.8rem;
+      border-radius: 50px;
+      border: 1px solid #b7dac6;
+    }
+
+    .clinic-features i {
+      color: #1d7a4b;
+      font-size: 1rem;
+    }
+
+    /* form styling */
+    .appointment-form h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #0c3f27;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 2px solid #c1e0d0;
+      padding-bottom: 0.8rem;
+    }
+
+    .appointment-form h3 i {
+      color: #278f58;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #1a5638;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      letter-spacing: 0.2px;
+    }
+
+    .form-group label i {
+      color: #2e8b5c;
+      width: 1.1rem;
+      font-size: 0.9rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: #f9fffc;
+      border: 1.5px solid #cde2d6;
+      border-radius: 1rem;
+      padding: 0.8rem 1rem;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.2s;
+      font-weight: 500;
+      color: #153e2a;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #3aa56b;
+      box-shadow: 0 0 0 4px rgba(58, 165, 107, 0.15);
+      background: #ffffff;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #8ab8a1;
+      font-weight: 400;
+    }
+
+    /* right side – payment card & info */
+    .payment-info-panel {
+      background: #f6fdf9;
+      border-radius: 2rem;
+      padding: 2rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border: 1px solid #cfe9db;
+      box-shadow: 0 12px 24px -12px rgba(20, 70, 40, 0.15);
+    }
+
+    .payment-card {
+      text-align: center;
+    }
+
+    .payment-icon {
+      font-size: 3rem;
+      color: #1b6b42;
+      background: #d7f0e2;
+      width: 5rem;
+      height: 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 2rem;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 8px 14px -6px rgba(40, 110, 60, 0.2);
+    }
+
+    .payment-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #0d422a;
+      margin-bottom: 0.5rem;
+    }
+
+    .payment-card p {
+      color: #3a6e54;
+      font-size: 0.95rem;
+      margin-bottom: 1.8rem;
+      max-width: 280px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .price-tag {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #13633c;
+      letter-spacing: -1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .price-tag span {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #548b70;
+      margin-top: 0.7rem;
+    }
+
+    .pesapal-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: #ffffff;
+      border: 1.5px solid #b2d9c4;
+      padding: 0.55rem 1.5rem;
+      border-radius: 60px;
+      font-weight: 600;
+      color: #1b5738;
+      margin: 1.5rem 0 1rem;
+      box-shadow: 0 6px 10px -6px #b7dac6;
+      font-size: 0.9rem;
+    }
+
+    .pesapal-badge i {
+      font-size: 1.3rem;
+      color: #217a4b;
+    }
+
+    .btn-pay {
+      background: #1b6b42;
+      border: none;
+      color: white;
+      font-weight: 700;
+      font-size: 1.15rem;
+      padding: 1rem 2rem;
+      width: 100%;
+      border-radius: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 10px 20px -8px #1b6b42b0;
+      border: 1px solid #26864f;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-pay i {
+      font-size: 1.3rem;
+    }
+
+    .btn-pay:hover {
+      background: #0e4e2e;
+      transform: scale(1.01);
+      box-shadow: 0 12px 22px -8px #0b3b24;
+    }
+
+    .btn-pay:active {
+      transform: scale(0.98);
+    }
+
+    .secure-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      color: #4b7d63;
+      margin-top: 1rem;
+    }
+
+    /* ---------- MODAL (PESAPAL PAYMENT) ---------- */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 45, 30, 0.5);
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s;
+      padding: 1.5rem;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background: #ffffff;
+      max-width: 440px;
+      width: 100%;
+      border-radius: 2.5rem;
+      padding: 2rem 2rem 1.8rem;
+      box-shadow: 0 30px 50px -15px #10321f;
+      transform: translateY(20px);
+      transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+      border: 1px solid #c2e2d1;
+      position: relative;
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: translateY(0);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: #2e6e4c;
+      cursor: pointer;
+      width: 2.2rem;
+      height: 2.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.15s;
+      line-height: 1;
+    }
+
+    .modal-close:hover {
+      background: #e2f3e9;
+      color: #0e4229;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-header i {
+      font-size: 2.2rem;
+      color: #1f7a4b;
+      background: #e2f3e9;
+      padding: 0.6rem;
+      border-radius: 1.2rem;
+    }
+
+    .modal-header h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #0a3b23;
+    }
+
+    .modal-amount {
+      background: #f3fcf7;
+      border-radius: 1.5rem;
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 1.5rem 0;
+      border: 1px dashed #7bbf97;
+      font-weight: 600;
+    }
+
+    .modal-amount span:first-child {
+      color: #2a6446;
+    }
+
+    .modal-amount .amount-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #0c5a32;
+    }
+
+    .pesapal-methods {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1.2rem 0 1rem;
+      justify-content: center;
+    }
+
+    .method-pill {
+      background: #eef9f2;
+      border-radius: 40px;
+      padding: 0.45rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #1f6440;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: 1px solid #b7dfc9;
+    }
+
+    .method-pill i {
+      font-size: 0.9rem;
+    }
+
+    .btn-confirm-payment {
+      background: #1b6b42;
+      border: none;
+      width: 100%;
+      padding: 1rem;
+      border-radius: 3rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      margin-top: 1.2rem;
+      box-shadow: 0 10px 18px -8px #1e7348;
+    }
+
+    .btn-confirm-payment:hover {
+      background: #0f4e2e;
+    }
+
+    .btn-confirm-payment:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .payment-success-message {
+      text-align: center;
+      padding: 1rem 0 0.5rem;
+      color: #1b6b42;
+      font-weight: 600;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      font-size: 1rem;
+    }
+
+    .payment-success-message i {
+      font-size: 1.6rem;
+    }
+
+    /* ---------- FOOTER ---------- */
+    .vet-footer {
+      background: #e2f3e9;
+      padding: 1rem 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #2f6649;
+      border-top: 1px solid #b7dac6;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1.8rem;
+    }
+
+    .vet-footer i {
+      margin-right: 0.3rem;
+      color: #1d7a4b;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 900px) {
+      .main-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 1.8rem;
+      }
+
+      .vet-header {
+        padding: 1.3rem 1.5rem;
+      }
+
+      .logo-text h1 {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 550px) {
+      body {
+        padding: 0.6rem;
+      }
+
+      .clinic-wrapper {
+        border-radius: 1.8rem;
+      }
+
+      .main-content {
+        padding: 1.5rem 1.2rem;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .form-group.full-width {
+        grid-column: span 1;
+      }
+
+      .hero-pet {
+        padding: 1.2rem;
+      }
+
+      .hero-pet-emoji {
+        font-size: 3rem;
+      }
+
+      .hero-pet-text h2 {
+        font-size: 1.3rem;
+      }
+
+      .modal-content {
+        padding: 1.8rem 1.5rem;
+      }
+
+      .price-tag {
+        font-size: 2.4rem;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .vet-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+      }
+
+      .logo-icon {
+        font-size: 1.8rem;
+      }
+
+      .logo-text h1 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="clinic-wrapper">
+    <!-- HEADER -->
+    <header class="vet-header">
+      <div class="logo-area">
+        <div class="logo-icon"><i class="fas fa-paw"></i></div>
+        <div class="logo-text">
+          <h1>Paws &amp; Care</h1>
+          <span>veterinary clinic</span>
+        </div>
+      </div>
+      <div class="header-badge">
+        <i class="fas fa-heartbeat"></i> 24/7 emergency
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+      <!-- LEFT PANEL -->
+      <div class="appointment-panel">
+        <div class="hero-pet">
+          <div class="hero-pet-text">
+            <h2>Gentle care for<br>your best friend</h2>
+            <p><i class="fas fa-check-circle"></i> Trusted by 2,000+ pet parents</p>
+            <ul class="clinic-features">
+              <li><i class="fas fa-stethoscope"></i> Certified vets</li>
+              <li><i class="fas fa-syringe"></i> Vaccinations</li>
+              <li><i class="fas fa-tooth"></i> Dental care</li>
+            </ul>
+          </div>
+          <div class="hero-pet-emoji">🐕‍🦺</div>
+        </div>
+
+        <!-- APPOINTMENT FORM -->
+        <div class="appointment-form">
+          <h3><i class="fas fa-calendar-plus"></i> Book appointment</h3>
+          <form id="appointmentForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label><i class="fas fa-user"></i> Your name</label>
+                <input type="text" id="ownerName" placeholder="e.g. Jane Doe" required>
+              </div>
+              <div class="form-group">
+                <label><i class="fas fa-dog"></i> Pet name</label>
+                <input type="text" id="petName" placeholder="e.g. Rocky" required>
+              </div>
+              <div class="form-group">
+                <label><i class="fas fa-phone-alt"></i> Phone</label>
+                <input type="tel" id="phone" placeholder="+254 700 123456" required>
+              </div>
+              <div class="form-group">
+                <label><i class="fas fa-envelope"></i> Email</label>
+                <input type="email" id="email" placeholder="you@example.com" required>
+              </div>
+              <div class="form-group">
+                <label><i class="fas fa-calendar-day"></i> Date</label>
+                <input type="date" id="apptDate" required>
+              </div>
+              <div class="form-group">
+                <label><i class="fas fa-clock"></i> Time</label>
+                <select id="apptTime" required>
+                  <option value="" disabled selected>Select time</option>
+                  <option value="09:00">09:00 AM</option>
+                  <option value="10:30">10:30 AM</option>
+                  <option value="12:00">12:00 PM</option>
+                  <option value="14:00">02:00 PM</option>
+                  <option value="15:30">03:30 PM</option>
+                  <option value="17:00">05:00 PM</option>
+                </select>
+              </div>
+              <div class="form-group full-width">
+                <label><i class="fas fa-notes-medical"></i> Reason / notes</label>
+                <textarea id="notes" rows="2" placeholder="Check-up, vaccination, or any concern..."></textarea>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- RIGHT PANEL: PAYMENT SUMMARY -->
+      <div class="payment-info-panel">
+        <div class="payment-card">
+          <div class="payment-icon">
+            <i class="fas fa-file-invoice-dollar"></i>
+          </div>
+          <h3>Consultation fee</h3>
+          <p>General check-up &amp; wellness exam</p>
+          <div class="price-tag">
+            KES 2,500 <span>incl. taxes</span>
+          </div>
+          <div class="pesapal-badge">
+            <i class="fas fa-shield-alt"></i> Powered by Pesapal
+          </div>
+          <button class="btn-pay" id="openPaymentBtn">
+            <i class="fas fa-lock"></i> Pay &amp; confirm
+          </button>
+          <div class="secure-note">
+            <i class="fas fa-lock"></i> Secure payment · Pesapal
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="vet-footer">
+      <span><i class="fas fa-map-pin"></i> 123 Vet Lane, Nairobi</span>
+      <span><i class="fas fa-phone"></i> +254 700 123456</span>
+      <span><i class="fas fa-clock"></i> Mon–Sat 8am–6pm</span>
+    </footer>
+  </div>
+
+  <!-- PESAPAL PAYMENT MODAL -->
+  <div class="modal-overlay" id="paymentModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeModalBtn">&times;</button>
+      <div class="modal-header">
+        <i class="fas fa-credit-card"></i>
+        <h2>Pesapal</h2>
+      </div>
+      <p style="color: #386e54; font-weight: 500; margin-bottom: 0.5rem;">Complete your appointment payment</p>
+      <div class="modal-amount">
+        <span>Total due</span>
+        <span class="amount-value">KES 2,500</span>
+      </div>
+
+      <div class="pesapal-methods">
+        <div class="method-pill"><i class="fas fa-mobile-alt"></i> M-Pesa</div>
+        <div class="method-pill"><i class="fas fa-credit-card"></i> Visa</div>
+        <div class="method-pill"><i class="fas fa-university"></i> Bank</div>
+      </div>
+
+      <!-- payment action -->
+      <button class="btn-confirm-payment" id="confirmPaymentBtn">
+        <i class="fas fa-check-circle"></i> Confirm payment
+      </button>
+
+      <!-- success message (hidden initially) -->
+      <div class="payment-success-message" id="paymentSuccessMsg">
+        <i class="fas fa-check-circle"></i> Payment successful! Appointment booked.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // ----- D
